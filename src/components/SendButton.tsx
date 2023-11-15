@@ -2,6 +2,7 @@ import { Show } from 'solid-js'
 import { JSX } from 'solid-js/jsx-runtime'
 import { SendIcon } from './icons'
 import { DeleteIcon } from './icons/DeleteIcon'
+import { UploadIcon } from './icons/UploadIcon'
 
 type SendButtonProps = {
     sendButtonColor?: string
@@ -28,6 +29,26 @@ export const SendButton = (props: SendButtonProps) => {
         </button>
     )
 }
+export const UploadButton = (props: SendButtonProps) => {
+    return (
+        <button
+            type='submit'
+            disabled={props.isDisabled || props.isLoading}
+            {...props}
+            class={
+                'py-2 px-4 justify-center font-semibold text-white focus:outline-none flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 transition-all filter hover:brightness-90 active:brightness-75 chatbot-button ' +
+                props.class
+            }
+            style={{ background: 'transparent', border: 'none' }}
+            title='Upload Text File'
+        >
+            <Show when={!props.isLoading} fallback={<Spinner class='text-white' />}>
+                <UploadIcon color={props.sendButtonColor} class={'send-icon flex '+ (props.disableIcon ? 'hidden' : '')}/>
+            </Show>
+        </button>
+    )
+}
+
 export const DeleteButton = (props: SendButtonProps) => {
     return (
         <button
